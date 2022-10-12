@@ -1,0 +1,116 @@
+<body>
+    <div class="container">
+        <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <h1 class="header">Account</h1>
+                    </div>
+                </div>
+            </div>
+            <div style="background-color:#fff !important">
+            </div>
+            <div class="card-body">
+
+
+                <mat-tab-group dynamicHeight>
+                    <mat-tab label="User Information">
+                        <form>
+                            <br>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-id">User Id</label>
+                                            <input type="text" id="input-id" class="form-control form-control-alternative" readonly value="{{profile.id}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Email address</label>
+                                            <input type="text" id="input-email" class="form-control form-control-alternative" readonly value="{{profile.email}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-first-name">First name</label>
+                                            <input type="text" id="input-first-name" class="form-control form-control-alternative" readonly value="{{profile.firstName}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-last-name">Last name</label>
+                                            <input type="text" id="input-last-name" class="form-control form-control-alternative" readonly value="{{profile.lastName}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-age">Age</label>
+                                            <input type="text" id="input-age" class="form-control form-control-alternative" readonly value="{{profile.age}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-mobile">Mobile Number</label>
+                                            <input type="text" id="input-mobile" class="form-control form-control-alternative" readonly value="{{profile.mobile}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-location">Location</label>
+                                            <input type="text" id="input-location" class="form-control form-control-alternative" readonly value="{{location.name}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-tab>
+                    <mat-tab label="Previous Orders" *ngIf="displayCustomerComponents">
+                        <div class="pl-lg-4">
+                            <div *ngIf="displayList">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Order Name</th>
+                                            <th scope="col">Order Number</th>
+                                            <th scope="col">Product Count</th>
+                                            <th scope="col">Order Status</th>
+                                            <th scope="col">Total Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let order of orders">
+                                            <td>{{order.name}}</td>
+                                            <td>{{order.orderNumber}}</td>
+                                            <td>{{order.productCount}}</td>
+                                            <td>{{order.status}}</td>
+                                            <td>{{order.totalCost}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div *ngIf="!displayList">
+                                <div class="card-body cart">
+                                    <div class="col-sm-12 empty-cart-cls text-center">
+                                        <h3><strong>No Previous Orders</strong></h3>
+                                        <div class="text-center">
+                                            <button class="button" style="display: block; margin-left: auto; margin-right: auto; width: 15%; " type="submit" [routerLink]="['']">Add To Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+
+            </div>
+        </div>
+    </div>
+</body>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">

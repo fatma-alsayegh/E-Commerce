@@ -1,0 +1,74 @@
+
+<body>
+    <div class="container">
+        <div class="card bg-secondary shadow">
+
+            <div class="card-header bg-white border-0">
+                <div class="top">
+                    <h3 class="Heading">Shopping Cart</h3>
+                    <h5 class="Action" (click)="removeAll()">Remove all</h5>
+                </div>
+
+            </div>
+            <div style="background-color:#fff !important">
+                <hr class="my-4">
+            </div>
+            <div class="card-body">
+                <div *ngIf="displayList || items.length>0">
+                    <div class="Cart-Items" *ngFor="let item of items">
+                        <div class="image-box">
+                            <img src="https://www.supah.it/dribbble/012/1.jpg" style="height:120px" />
+                        </div>
+                        <div class="about">
+                            <h1 class="title">{{ item.name }}</h1>
+                            <h3 class="subtitle">{{ item.description }}</h3>
+                        </div>
+                        <div class="counter">
+                            <div class="btn" (click)="minus(item)">-</div>
+
+                            <div class="count"> {{item.quantity}} </div>
+                            <div class="btn" (click)="plus(item)">+</div>
+                        </div>
+                        <div class="prices">
+                            <div class="amount">{{item.price * item.quantity | currency:'AED'}}</div>
+
+                            <div class="remove" (click)="removeItem(item)"><u>Remove</u></div>
+                        </div>
+                    </div>
+
+
+                    <hr class="mid-checkout-line" *ngIf= "items.length>0">
+                    <div class="checkout" *ngIf= "items.length>0">
+                        <div class="total" >
+                            <div>
+                                <div class="Subtotal">Sub-Total</div>
+                                <div class="items">
+                                    {{productCount}} items
+                                </div>
+                                <div class="total-amount">{{totalPriceOfAllProducts | currency:'AED'}}</div>
+
+                            </div>
+                            <button class="button" (click)="checkout()">Checkout</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div *ngIf="displayEmptyList|| items.length<0">
+                    <div class="card-body cart">
+                        <div class="col-sm-12 empty-cart-cls text-center">
+                            <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                            <h3><strong>Your Cart is Empty</strong></h3>
+                            <div class="text-center">
+                                <button class="button" style="display: block; margin-left: auto; margin-right: auto; width: 15%; " type="submit" [routerLink]="['']">Add Items</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>

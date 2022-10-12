@@ -1,0 +1,66 @@
+<body>
+    <div class="card">
+        <div class="container">
+            <br>
+            <div class="row align-right">
+                <div class="col-12">
+                    <mat-tab-group mat-align-tabs="start" (selectedTabChange)="filterCategory($event)">
+                        <mat-tab label="All Categories">
+                        </mat-tab>
+                        <mat-tab *ngFor="let type of categoryList" value="{{type.id}}" label="{{type.name}}">
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4" *ngFor="let product of tempFilteredData">
+                    <div class="container page-wrapper">
+                        <div class="page-inner">
+                            <div class="row">
+                                <div class="el-wrapper">
+                                    <div class="box-up">
+                                        <!--https://www.supah.it/dribbble/012/1.jpg-->
+                                        <img class="img" src="https://www.supah.it/dribbble/012/1.jpg" alt="">
+                                        <div class="img-info">
+                                            <div class="info-inner">
+                                                <span class="p-name">{{product.name}}</span>
+                                                <span class="p-company">{{product.description}}</span>
+                                                <!--<span class="p-price">--><!--{{product.price}} AED--><!--</span>-->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-down">
+                                        <div class="h-bg">
+                                            <div class="h-bg-inner"></div>
+                                        </div>
+                                        <div class="cart">
+                                            <div class="price">{{product.price*product.quantity | currency:'AED'}}</div>
+                                            <div class="quantity" *ngIf="!dontShowComponent">
+                                                <div class="counter">
+                                                    <div class="btn" (click)="minus(product)">-</div>
+
+                                                    <div class="count"> {{product.quantity}} </div>
+                                                    <div class="btn" (click)="plus(product)">+</div>
+                                                </div>
+                                            </div>
+                                            <div class="add-to-cart" *ngIf="!dontShowComponent">
+                                                <button mat-button (click)="addToCart(product)">
+                                                    <mat-icon aria-label="Example home icon">add_shopping_cart</mat-icon>
+
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

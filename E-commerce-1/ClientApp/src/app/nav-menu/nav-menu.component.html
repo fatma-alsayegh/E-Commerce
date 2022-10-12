@@ -1,0 +1,38 @@
+<header>
+    <nav class="fixed-top navbar navbar-expand-sm navbar-toggleable-sm bg-white navbar-light  border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" [routerLink]="['/']">E-commerce</a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse"
+                    aria-label="Toggle navigation"
+                    [attr.aria-expanded]="isExpanded"
+                    (click)="toggle()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+                 [ngClass]="{ show: isExpanded }">
+                <ul class="navbar-nav flex-grow">
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <button mat-button [routerLink]="['/category']" *ngIf="loginService.globalAdmin &&authenticationService.isAuthenticated">Category</button>
+                        <button mat-button [routerLink]="['/product']" *ngIf="loginService.globalAdmin &&authenticationService.isAuthenticated">Product</button>
+                        <button mat-button [routerLink]="['/shopping-cart']" *ngIf="loginService.globalCustomer &&authenticationService.isAuthenticated">
+                            <mat-icon aria-label="Example home icon">shopping_cart</mat-icon>
+                        </button>
+                        <button mat-button [routerLink]="['/authentication/profile']" *ngIf="authenticationService.isAuthenticated">
+                            <mat-icon>person</mat-icon>
+                        </button>
+                        <button mat-button class=" pointer" (click)="logout()" *ngIf="authenticationService.isAuthenticated">
+                            <mat-icon aria-label="Example home icon">logout</mat-icon>logout
+                        </button>
+                        <button mat-button class=" pointer" (click)="login()" *ngIf="!authenticationService.isAuthenticated">
+                            <mat-icon aria-label="Example home icon">login</mat-icon>login
+                        </button>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

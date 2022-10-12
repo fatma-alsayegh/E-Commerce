@@ -7,16 +7,14 @@ import { Product } from '../models/product';
 import { ProductService } from '../Product/service/product.service';
 import { ShoppingCartService } from '../shopping-cart/service/shopping-cart.service';
 
+
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 
 })
-interface Alert {
-    type: string;
-    message: string;
-}
+
 export class HomeComponent implements OnInit {
     products: Product[] = [];
     categoryList: any = [];
@@ -96,10 +94,5 @@ export class HomeComponent implements OnInit {
 
     addToCart(product: Product) {
         this.shoopingCartService.addToCart(product);
-    }
-    alerts: Alert[];
-
-    close(alert: Alert) {
-        this.alerts.splice(this.alerts.indexOf(alert), 1);
     }
 }

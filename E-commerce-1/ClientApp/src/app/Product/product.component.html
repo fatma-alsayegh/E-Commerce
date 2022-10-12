@@ -1,0 +1,168 @@
+<body>
+    <div class="container">
+        <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <h1 class="header">Products</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row align-right">
+                    <div class="col-3">
+                        <select class="form-control" (change)="filterCategory($event)">
+                            <option value="pick" Selected>Pick a Category</option>
+                            <option *ngFor="let type of categoryList" value="{{type.id}}">
+                                {{type.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <button class="submit btn btn-primary" style="float: right; margin-right: -450px;" data-target="#addModal" data-toggle="modal">Add a Product</button>
+                    </div>
+                </div>
+                <br>
+                <table class="table" *ngIf="tempFilteredData.length > 0">
+                    <thead>
+                        <tr>
+                            <th scope="col">icon</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Category</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of tempFilteredData">
+                            <td><img src="{{product.icon}}" alt=""></td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.description}}</td>
+                            <td>{{product.price}}</td>
+                            <td>{{categoryMap.get(product.categoryId)}}</td>
+                            <td>
+                                <button mat-button class="pointer" data-target="#editModal" data-toggle="modal" (click)="edit(product)">
+                                    <mat-icon aria-label="Example home icon">edit</mat-icon>
+                                </button>
+                                <button mat-button class="pointer">
+                                    <mat-icon aria-label="Example home icon" (click)="deleteProduct(product)">delete</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-danger" role="alert" *ngIf="tempFilteredData.length <= 0">
+                    No Products
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                <button type="button" #CloseButtonEdit class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #updateProductForm="ngForm">
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-name">Name</label>
+                        <input type="text" id="name" class="form-control  form-control-alternative" name="name" [(ngModel)]="_product.name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-description">Description</label>
+                        <input type="text" id="description" class="form-control  form-control-alternative" name="description" [(ngModel)]="_product.description">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-price">Price</label>
+                        <input type="text" id="price" class="form-control  form-control-alternative" name="price" [(ngModel)]="_product.price">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-category-type">Category Type</label>
+                        <select class="form-control" name="categoryId" id="categoryId" [(ngModel)]="_product.categoryId" required>
+                            <option *ngFor="let type of categoryList" [value]="type.id">
+                                {{type.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" value="Update" class="btn btn-primary w-100" (click)="updateProduct(updateProductForm)" #CloseButtonEdit id="closeModal">Update</button>
+
+                </form>
+                <div class="alert alert-danger" role="alert" *ngIf="isFormValid">
+                    Please fill all fields.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Add a Product</h5>
+                <button type="button" #CloseButtonAdd class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #productForm="ngForm" id="my_form">
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-category-type">Category Type</label>
+                        <select class="form-control" name="categoryId" id="categoryId" #categoryId [(ngModel)]="_product.categoryId" required>
+                            <option *ngFor="let type of categoryList" [value]="type.id">
+                                {{type.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-name">Name</label>
+                        <input type="text" id="name" class="form-control  form-control-alternative" name="name" placeholder="Enter a Name" #name [(ngModel)]="_product.name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-email">Description</label>
+                        <input type="text" id="description" class="form-control  form-control-alternative" name="description" placeholder="Enter Description" #description [(ngModel)]="_product.description" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-description">Price</label>
+                        <input type="text" id="price" class="form-control  form-control-alternative" name="price" placeholder="Enter a Price" #price [(ngModel)]="_product.price" required>
+                    </div>
+                    <!--<div class="form-group">
+                        <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                        <div><img [src]="url" *ngIf="url" style="width:150px; height:150px;"></div>
+                        <p>
+                            <input type="file" (change)="selectFile($event)">
+                        </p>
+                    </div>-->
+                    <button type="submit" class="submit btn btn-primary" (click)="addProduct(productForm)" #CloseButtonAdd id="closeModal">Submit</button>
+
+                    <br>
+
+                    <!--<div class="alert alert-danger" role="alert" *ngIf="areCredentialsInvalid">
+                        Duplicate Product
+                    </div>-->
+                </form>
+                <div class="alert alert-danger" role="alert" *ngIf="isFormValid">
+                    Please fill all fields.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

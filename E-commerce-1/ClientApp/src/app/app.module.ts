@@ -14,15 +14,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { ProfileComponent } from './authentication/profile/profile.component';
-import { LocalService } from './local.service';
 import { AuthGuard } from './gaurd/auth.guard';
 import { CategoryComponent } from './Category/category.component';
 import { CategoryService } from './Category/service/category.service';
@@ -51,7 +50,7 @@ import { AuthenticationService } from './authentication/authentication.service';
         MatDialogModule,
         MatCardModule,
         MatInputModule,
-        MatTabsModule,
+        MatTabsModule, 
         MatMenuModule, MatFormFieldModule, MatButtonModule, MatToolbarModule,
         BrowserAnimationsModule,
         RouterModule.forRoot([
@@ -64,7 +63,7 @@ import { AuthenticationService } from './authentication/authentication.service';
 
         ]),
     ],
-    providers: [LocalService, CategoryService, AuthenticationService],
+    providers: [ CategoryService, AuthenticationService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

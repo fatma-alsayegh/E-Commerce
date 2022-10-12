@@ -1,0 +1,142 @@
+<body>
+    <div class="container">
+        <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <h1 class="header">Categories</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row align-right">
+                    <div class="col-3">
+                        <button class="submit btn btn-primary" data-target="#addModal" data-toggle="modal" style="float: right; margin-right: -700px;">Add a Category</button>
+                    </div>
+                </div>
+                <br>
+                <table class="table">
+                    <thead *ngIf="categories.length > 0">
+                        <tr>
+                            <th scope="col">icon</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">
+                                <!--<button class="submit btn btn-primary" data-target="#addModal" data-toggle="modal">Add category</button>-->
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let category of categories">
+                            <td>{{category.icon}}</td>
+                            <td>{{category.name}}</td>
+                            <td>{{category.description}}</td>
+                            <td>
+                                <button mat-button class="pointer" data-target="#editModal" data-toggle="modal" (click)="edit(category)">
+                                    <mat-icon aria-label="Example home icon">edit</mat-icon>
+                                </button>
+                                <button mat-button class="pointer">
+                                    <mat-icon aria-label="Example home icon" (click)="deleteCategory(category)">delete</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-danger" role="alert" *ngIf="categories.length <= 0">
+                    No categories
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+                <button type="button" #CloseButtonEdit class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #updateCategoryForm="ngForm">
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-id">Name</label>
+                        <input type="text" id="name" class="form-control  form-control-alternative" name="name" #name [(ngModel)]="editCategory.name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-email">Description</label>
+                        <input type="text" id="description" class="form-control  form-control-alternative" name="description" #description [(ngModel)]="editCategory.description">
+                    </div>
+                    <button type="submit" value="Update" class="btn btn-primary w-100" (click)="updateCategory(updateCategoryForm)" #CloseButtonEdit id="closeModal">Update</button>
+                    <br>
+
+                </form>
+                <div class="alert alert-danger" role="alert" *ngIf="isFormValid">
+                    Please fill all fields.
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="areCredentialsInvalid">
+                    Duplicate Category
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add a Category</h5>
+                <button type="button" #CloseButtonAdd class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #categoryForm="ngForm" id="my_form">
+
+                    <div class="pl-lg-4">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group focused">
+                                    <label class="form-control-label" for="input-id">Name</label>
+                                    <input type="text" id="name" class="form-control  form-control-alternative" name="name" placeholder="Enter Category Name" [(ngModel)]="addcategory.name" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-email">Description</label>
+                                    <input type="text" id="description" class="form-control  form-control-alternative" name="description" placeholder="Enter Description" [(ngModel)]="addcategory.description" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit btn btn-primary" (click)="onProductCreate(categoryForm)" #CloseButtonAdd id="closeModal">Submit</button>
+                    <br>
+
+                </form>
+                <div class="alert alert-danger" role="alert" *ngIf="isFormValid">
+                    Please fill all fields.
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="areCredentialsInvalid">
+                    Duplicate Category
+                </div>
+                <!--<button type="submit" value="Update" class="btn btn-primary w-100" data-dismiss="modal">Update</button>-->
+            </div>
+        </div>
+    </div>
+</div>
