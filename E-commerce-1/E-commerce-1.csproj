@@ -15,30 +15,63 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.27" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.29" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.29" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.29" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.29">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\Category\delete-category\**" />
+    <Compile Remove="ClientApp\src\app\Category\edit-category\**" />
     <Compile Remove="ClientApp\src\app\counter\**" />
     <Compile Remove="ClientApp\src\app\fetch-data\**" />
     <Compile Remove="ClientApp\src\app\material\**" />
+    <Compile Remove="ClientApp\src\app\Product\add-product\**" />
+    <Compile Remove="ClientApp\src\app\services\**" />
     <Compile Remove="obj\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\Category\delete-category\**" />
+    <Content Remove="ClientApp\src\app\Category\edit-category\**" />
     <Content Remove="ClientApp\src\app\counter\**" />
     <Content Remove="ClientApp\src\app\fetch-data\**" />
     <Content Remove="ClientApp\src\app\material\**" />
+    <Content Remove="ClientApp\src\app\Product\add-product\**" />
+    <Content Remove="ClientApp\src\app\services\**" />
     <Content Remove="obj\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\Category\delete-category\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\Category\edit-category\**" />
     <EmbeddedResource Remove="ClientApp\src\app\counter\**" />
     <EmbeddedResource Remove="ClientApp\src\app\fetch-data\**" />
     <EmbeddedResource Remove="ClientApp\src\app\material\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\Product\add-product\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\services\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\Category\delete-category\**" />
+    <None Remove="ClientApp\src\app\Category\edit-category\**" />
     <None Remove="ClientApp\src\app\counter\**" />
     <None Remove="ClientApp\src\app\fetch-data\**" />
     <None Remove="ClientApp\src\app\material\**" />
+    <None Remove="ClientApp\src\app\Product\add-product\**" />
+    <None Remove="ClientApp\src\app\services\**" />
     <None Remove="obj\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\CategoriesController.cs" />
+    <Compile Remove="Controllers\ProductsController.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,18 +81,32 @@
     <None Remove="ClientApp\src\app\authentication\login\view.component.html" />
     <None Remove="ClientApp\src\app\authentication\login\view.component.spec.ts" />
     <None Remove="ClientApp\src\app\authentication\login\view.component.ts" />
+    <None Remove="ClientApp\src\app\Category\delete-category\delete-category.component.css" />
+    <None Remove="ClientApp\src\app\Category\delete-category\delete-category.component.html" />
+    <None Remove="ClientApp\src\app\Category\delete-category\delete-category.component.spec.ts" />
+    <None Remove="ClientApp\src\app\Category\delete-category\delete-category.component.ts" />
+    <None Remove="ClientApp\src\app\Category\edit-category\edit-category.component.css" />
+    <None Remove="ClientApp\src\app\Category\edit-category\edit-category.component.html" />
+    <None Remove="ClientApp\src\app\Category\edit-category\edit-category.component.spec.ts" />
+    <None Remove="ClientApp\src\app\Category\edit-category\edit-category.component.ts" />
     <None Remove="ClientApp\src\app\counter\counter.component.html" />
     <None Remove="ClientApp\src\app\counter\counter.component.spec.ts" />
     <None Remove="ClientApp\src\app\counter\counter.component.ts" />
     <None Remove="ClientApp\src\app\fetch-data\fetch-data.component.html" />
     <None Remove="ClientApp\src\app\fetch-data\fetch-data.component.ts" />
+    <None Remove="ClientApp\src\app\gaurd\role-guard.guard.spec.ts" />
+    <None Remove="ClientApp\src\app\gaurd\role-guard.guard.ts" />
+    <None Remove="ClientApp\src\app\local.service.spec.ts" />
+    <None Remove="ClientApp\src\app\local.service.ts" />
     <None Remove="ClientApp\src\app\material\material.module.ts" />
     <None Remove="ClientApp\src\app\nav-bar.service.spec.ts" />
     <None Remove="ClientApp\src\app\nav-bar.service.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\app\gaurd\" />
+    <None Remove="ClientApp\src\app\Product\add-product\add-product.component.css" />
+    <None Remove="ClientApp\src\app\Product\add-product\add-product.component.html" />
+    <None Remove="ClientApp\src\app\Product\add-product\add-product.component.spec.ts" />
+    <None Remove="ClientApp\src\app\Product\add-product\add-product.component.ts" />
+    <None Remove="ClientApp\src\app\services\users.service.spec.ts" />
+    <None Remove="ClientApp\src\app\services\users.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

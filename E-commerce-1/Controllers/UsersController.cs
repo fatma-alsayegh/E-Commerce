@@ -1,60 +1,37 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using E_commerce_1.Context;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace E_commerce_1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : Controller
     {
+        private readonly ECommerceContext _eCommerceContext;
 
-        private static User[] users = new User[]
+        public UsersController(ECommerceContext eCommerceContext)
         {
-           new User{
-                Username="admin",
-                Password="123",
-                Email="admin@emaratech.ae",
-                FirstName="Admin",
-                LastName="Admin",
-                Country="UAE",
-                City="Sharjah",
-            },
-            new User{
-                Username="fatma",
-                Password="123",
-                Email="fatma@emaratech.ae",
-                FirstName="Fatma",
-                LastName="AlSayegh",
-                Country="UAE",
-                City="Dubai",
-            }
-        };
-
-        private readonly ILogger<UsersController> _logger;
-        public UsersController(ILogger<UsersController> logger)
-        {
-            _logger = logger;
+            this._eCommerceContext = eCommerceContext;
         }
 
-      
-
         [HttpGet]
-        public User Get(string username, string password)
+        public IActionResult GetUser(string email, string password)
         {
-            var user = users.FirstOrDefault(x => x.Username == username && x.Password == password);
-            if (user != null)
+            var user = _eCommerceContext.Users.Where(x => x.Email == email && x.Password == password);
+
+            if (user.Any())
             {
-              
-                return user;
+                return Ok(user);
             }
             else
             {
                 return null;
             }
-
         }
-
-
     }
 }
