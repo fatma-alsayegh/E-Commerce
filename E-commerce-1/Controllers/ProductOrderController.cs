@@ -1,14 +1,6 @@
 ﻿using E_commerce_1.Context;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace E_commerce_1.Controllers
@@ -17,12 +9,9 @@ namespace E_commerce_1.Controllers
     public class ProductOrderController : Controller
     {
         private readonly ECommerceContext _eCommerceContext;
-        public ProductOrderController(ECommerceContext eCommerceContext) { 
-            this._eCommerceContext = eCommerceContext;
-        }
-        public ActionResult Index()
+        public ProductOrderController(ECommerceContext eCommerceContext)
         {
-            return View();
+            this._eCommerceContext = eCommerceContext;
         }
 
         [HttpGet]
@@ -42,13 +31,9 @@ namespace E_commerce_1.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProductInOrder([FromBody] Product_Order product_order)
         {
-           
             _eCommerceContext.Product_Orders.Add(product_order);
             await _eCommerceContext.SaveChangesAsync();
             return Ok(product_order);
-
         }
-
-       
     }
 }

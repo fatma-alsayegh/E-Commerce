@@ -14,6 +14,7 @@ export class LoginService {
     userId = 0;
     globalAdmin = false;
     globalCustomer = false;
+    loggedIn = false;
 
     constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this._baseUrl = baseUrl;
@@ -29,10 +30,13 @@ export class LoginService {
         if (this.role.id == 1) {
             this.globalAdmin = true;
             this.globalCustomer = false;
+            this.loggedIn = true;
         }
         if (this.role.id == 2) {
             this.globalAdmin = false;
             this.globalCustomer = true;
+            this.loggedIn = true;
+
         }
     }
 }

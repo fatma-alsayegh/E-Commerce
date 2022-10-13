@@ -7,6 +7,7 @@ import { Product_Order } from '../../models/product_order';
 @Injectable({
     providedIn: 'root'
 })
+
 export class ShoppingCartService {
     _baseUrl = '';
     products: Product[] = [];
@@ -26,19 +27,18 @@ export class ShoppingCartService {
     };
 
     constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-
         this._baseUrl = baseUrl;
     }
 
     addToCart(product: Product) {
         var p = new Product();
-        p.id = product.id,
-            p.name = product.name,
-            p.description = product.description,
-            p.categoryId = product.categoryId,
-            p.icon = product.icon,
-            p.price = product.price,
-            p.quantity = product.quantity
+        p.id = product.id;
+        p.name = product.name;
+        p.description = product.description;
+        p.categoryId = product.categoryId;
+        p.icon = product.icon;
+        p.price = product.price;
+        p.quantity = product.quantity;
 
         if (this.products.findIndex(x => p.id == x.id) == -1) {
             this.products.push(p);
@@ -46,8 +46,6 @@ export class ShoppingCartService {
         else {
             var existingItem = this.products.filter(x => x.id == p.id)[0];
             existingItem.quantity += p.quantity;
-            //this.totalPriceOfAllProducts += (Number(existingItem.price));
-            //this.totalPriceOfAllProducts -= (Number(existingItem.price) * existingItem.quantity);
         }
         this.productCount += p.quantity;
         this.priceIncrease(p);
@@ -84,7 +82,7 @@ export class ShoppingCartService {
         ++this.orderNum;
         return this.http.post<Order>(this._baseUrl + 'order', order);
     }
-    
+
     addProductsToOrder(order: Order) {
         for (this.i = 0; this.i < order.productCount; this.i++) {
             this.productsComplete += this.products[this.i].quantity;

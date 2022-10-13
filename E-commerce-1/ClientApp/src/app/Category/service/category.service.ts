@@ -15,12 +15,12 @@ export class CategoryService {
         return this.http.get<Category[]>(this._baseUrl + 'category');
     }
 
-    addCategory(formData: FormData) {//formData: FormData category: Category
+    addCategory(formData: FormData) {
         return this.http.post<Category>(this._baseUrl + 'category', formData);
     }
 
-    editCategory(category: Category) {
-        return this.http.put<Category>(this._baseUrl + 'category', category);
+    editCategory(formData: FormData) {
+        return this.http.put<Category>(this._baseUrl + 'category', formData);
     }
 
     deleteCategory(id) {

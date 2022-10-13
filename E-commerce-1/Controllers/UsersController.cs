@@ -1,10 +1,6 @@
 ﻿using E_commerce_1.Context;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace E_commerce_1.Controllers
 {

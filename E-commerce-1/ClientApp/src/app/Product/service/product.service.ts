@@ -19,8 +19,8 @@ export class ProductService {
         return this.http.post<Product>(this._baseUrl + 'product', formData);
     }
 
-    editProduct(product: Product) {
-        return this.http.put<Product>(this._baseUrl + 'product', product);
+    editProduct(formData: FormData) {
+        return this.http.put<Product>(this._baseUrl + 'product', formData);
     }
 
     deleteProduct(id) {

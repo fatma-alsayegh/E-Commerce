@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { LoginService } from '../authentication/login/service/login.service';
 import { Role } from '../models/role';
@@ -17,7 +16,7 @@ export class NavMenuComponent implements OnInit {
     role: Role;
 
     constructor(
-        private authenticationService: AuthenticationService, private router: Router, private loginService: LoginService,
+        private authenticationService: AuthenticationService, private loginService: LoginService,
         @Inject('BASE_URL') baseUrl: string
     ) {
         this._baseUrl = baseUrl;
@@ -34,6 +33,7 @@ export class NavMenuComponent implements OnInit {
         this.authenticationService.logout();
         this.loginService.globalAdmin = false;
         this.loginService.globalCustomer = false;
+        this.loginService.loggedIn = false;
     }
 
     async login() {

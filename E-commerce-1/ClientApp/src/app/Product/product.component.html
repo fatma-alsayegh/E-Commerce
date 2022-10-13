@@ -1,5 +1,6 @@
 <body>
     <div class="container">
+        <br><br>
         <div class="card bg-secondary shadow">
             <div class="card-header bg-white border-0">
                 <div class="row align-items-center">
@@ -36,17 +37,15 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let product of tempFilteredData">
-                            <td><img src="{{product.icon}}" alt=""></td>
+                            <td><img class="img" src="{{ product.icon }}" alt="" style="width: 100px; height: 100px;"></td>
                             <td>{{product.name}}</td>
                             <td>{{product.description}}</td>
                             <td>{{product.price}}</td>
                             <td>{{categoryMap.get(product.categoryId)}}</td>
                             <td>
-                                <button mat-button class="pointer" data-target="#editModal" data-toggle="modal" (click)="edit(product)">
-                                    <mat-icon aria-label="Example home icon">edit</mat-icon>
-                                </button>
                                 <button mat-button class="pointer">
-                                    <mat-icon aria-label="Example home icon" (click)="deleteProduct(product)">delete</mat-icon>
+                                    <mat-icon aria-label="Example home icon" data-target="#editModal" data-toggle="modal" (click)="edit(product)">edit</mat-icon>
+                                    <mat-icon aria-label="Example home icon" (click)="deleteProduct(product)" style="padding-left: 10px;">delete</mat-icon>
                                 </button>
                             </td>
                         </tr>
@@ -57,14 +56,11 @@
                 </div>
             </div>
         </div>
-
     </div>
 </body>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
-
-
-
+<!-- edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -76,7 +72,6 @@
             </div>
             <div class="modal-body">
                 <form #updateProductForm="ngForm">
-
                     <div class="form-group">
                         <label class="form-control-label" for="input-name">Name</label>
                         <input type="text" id="name" class="form-control  form-control-alternative" name="name" [(ngModel)]="_product.name">
@@ -97,8 +92,14 @@
                             </option>
                         </select>
                     </div>
-                    <button type="submit" value="Update" class="btn btn-primary w-100" (click)="updateProduct(updateProductForm)" #CloseButtonEdit id="closeModal">Update</button>
-
+                    <div class="form-group">
+                        <div [innerHtml]='msg' *ngIf="msg " style="color: red;"></div>
+                        <div><img [src]="url" *ngIf="url" style="width:200px; "></div>
+                        <p>
+                            <input type="file" (change)="selectFile($event)">
+                        </p>
+                    </div>
+                    <button type="submit" value="Update" class="btn btn-primary" (click)="updateProduct(updateProductForm)" #CloseButtonEdit id="closeModal">Update</button>
                 </form>
                 <div class="alert alert-danger" role="alert" *ngIf="isFormValid">
                     Please fill all fields.
@@ -107,8 +108,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!-- add Modal -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
@@ -121,8 +120,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form #productForm="ngForm" id="my_form">
-
+                <form #productForm="ngForm" id="productForm">
                     <div class="form-group">
                         <label class="form-control-label" for="input-category-type">Category Type</label>
                         <select class="form-control" name="categoryId" id="categoryId" #categoryId [(ngModel)]="_product.categoryId" required>
@@ -138,26 +136,20 @@
                     <div class="form-group">
                         <label class="form-control-label" for="input-email">Description</label>
                         <input type="text" id="description" class="form-control  form-control-alternative" name="description" placeholder="Enter Description" #description [(ngModel)]="_product.description" required>
-
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" for="input-description">Price</label>
                         <input type="text" id="price" class="form-control  form-control-alternative" name="price" placeholder="Enter a Price" #price [(ngModel)]="_product.price" required>
                     </div>
-                    <!--<div class="form-group">
+                    <div class="form-group">
                         <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
-                        <div><img [src]="url" *ngIf="url" style="width:150px; height:150px;"></div>
+                        <div><img [src]="url" *ngIf="url" style="width:200px; height:150px;"></div>
                         <p>
-                            <input type="file" (change)="selectFile($event)">
+                            <input type="file" (change)="selectFile($event)" required>
                         </p>
-                    </div>-->
+                    </div>
                     <button type="submit" class="submit btn btn-primary" (click)="addProduct(productForm)" #CloseButtonAdd id="closeModal">Submit</button>
-
                     <br>
-
-                    <!--<div class="alert alert-danger" role="alert" *ngIf="areCredentialsInvalid">
-                        Duplicate Product
-                    </div>-->
                 </form>
                 <div class="alert alert-danger" role="alert" *ngIf="isFormValid">
                     Please fill all fields.

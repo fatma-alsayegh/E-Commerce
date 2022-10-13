@@ -12,16 +12,19 @@ export class CategoryComponent implements OnInit {
     categories: Category[] = [];
     _baseUrl = '';
     formData = new FormData();
-    editCategory = {
-        id: null,
-        name: "",
-        description: "",
-        icon: ""
+    _category = {
+        id: 0,
+        name: '',
+        description: '',
+        icon: '',
     }
     isFormValid = false;
-    areCredentialsInvalid = false;
-    constructor( @Inject('BASE_URL') baseUrl: string,
-        public service: CategoryService) {
+    //areCredentialsInvalid = false;
+    @ViewChild('CloseButtonEditCategory') CloseButtonEditCategory;
+    @ViewChild('CloseButtonAddCategory') CloseButtonAddCategory;
+    @ViewChild('categoryForm') categoryForm;
+
+    constructor(@Inject('BASE_URL') baseUrl: string, public service: CategoryService) {
         this._baseUrl = baseUrl;
     }
 
@@ -36,36 +39,39 @@ export class CategoryComponent implements OnInit {
             }
         )
     }
-    edit(category: any) {
-        //this.editCategory = category;
-        this.editCategory = new Category();
-        this.editCategory.id = category.id;
-        this.editCategory.name = category.name;
-        this.editCategory.description = category.description;
-        
-    }
-    @ViewChild('CloseButtonEdit') CloseButtonEdit;
 
-    updateCategory(ngForm: NgForm) {
-        //debugger
-        this.editCategory.name = ngForm.value.name;
-        this.editCategory.description = ngForm.value.description;
-        if (this.editCategory.name == "" || this.editCategory.description=="") {
+    edit(category: any) {
+        this._category = new Category();
+        this._category.id = category.id;
+        this._category.name = category.name;
+        this._category.description = category.description;
+        this._category.icon = category.icon;
+        this.url = category.icon;
+    }
+
+    async updateCategory(ngForm: NgForm) {
+        this.isFormValid = false;
+        this._category.name = ngForm.value.name;
+        this._category.description = ngForm.value.description;
+
+        if (this._category.name == "" || this._category.description == "") {
             this.isFormValid = true;
-            this.areCredentialsInvalid = false;
             return;
         }
 
-        this.service.editCategory(this.editCategory).subscribe(
+        this.formData.set('id', this._category.id.toString());
+        this.formData.set('name', this._category.name);
+        this.formData.set('description', this._category.description);
+        this.formData.set('icon', this.url);
+
+        await this.service.editCategory(this.formData).subscribe(
             result => {
-                this.CloseButtonEdit.nativeElement.click();
+                this.CloseButtonEditCategory.nativeElement.click();
                 this.fetchData();
                 this.isFormValid = false;
-                this.areCredentialsInvalid = false;
             },
             (err) => {
                 this.isFormValid = false;
-                this.areCredentialsInvalid = true;
                 console.log(err);
             }
         );
@@ -77,52 +83,60 @@ export class CategoryComponent implements OnInit {
                 (u: Category) => u.id !== category.id
             );
             this.fetchData();
-
         });
     }
 
-    addcategory: Category = {
-        id: 0,
-        icon: '',
-        name: '',
-        description: ''
-    };
+    async onProductCreate(ngForm: NgForm) {
+        this._category.name = ngForm.value.name;
+        this._category.description = ngForm.value.description;
 
-    @ViewChild('CloseButtonAdd') CloseButtonAdd;
-    @ViewChild('my_form') my_form;
-
-    onProductCreate(ngForm: NgForm) {
-        this.addcategory.name = ngForm.value.name;
-        this.addcategory.description = ngForm.value.description;
         if (!ngForm.valid) {
             this.isFormValid = true;
-            this.areCredentialsInvalid = false;
             return;
         }
 
-        this.formData.set('name', this.addcategory.name);
-        this.formData.set('description', this.addcategory.description);
-        this.service.addCategory(this.formData).subscribe(
+        this.formData.set('name', this._category.name);
+        this.formData.set('description', this._category.description);
+        this.formData.set('icon', this.url);
+
+        await this.service.addCategory(this.formData).subscribe(
             result => {
-                if (result == null) {
-                    console.log('duplicate product');
-                } else {
-                    this.CloseButtonAdd.nativeElement.click();
-                    this.fetchData();
-                    this.my_form.reset();
-                    this.isFormValid = false;
-                    this.areCredentialsInvalid = false;
-                }
-                //this.closebutton.nativeElement.click();
-                //this.fetchData();
-
-
+                this.CloseButtonAddCategory.nativeElement.click();
+                this.fetchData();
+                this.url = "";
+                this.isFormValid = false;
+                this.categoryForm.reset();
             }, error => {
                 this.isFormValid = false;
-                this.areCredentialsInvalid = true;
                 console.log(error);
             }
         );
 
+    }
+
+    url: any;
+    msg = "";
+    imgReader = new FileReader();
+    fileToUpload: File = null;
+
+    selectFile(event: any) {
+
+        if (!event.target.files[0] || event.target.files[0].length == 0) {
+            this.msg = 'You must select an image';
+            return;
+        }
+
+        var mimeType = event.target.files[0].type;
+        if (mimeType.match(/image\/*/) == null) {
+            this.msg = "Only images are supported";
+            return;
+        }
+
+        this.formData.append(this._category.id.toString(), event.target.files[0]);
+        this.imgReader.readAsDataURL(event.target.files[0]);
+        this.imgReader.onload = (_event) => {
+            this.msg = "";
+            this.url = this.imgReader.result;
+        }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_commerce_1.Migrations
 {
     [DbContext(typeof(ECommerceContext))]
-    [Migration("20221012044756_d")]
-    partial class d
+    [Migration("20221013103234_db")]
+    partial class db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,30 +45,30 @@ namespace E_commerce_1.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Shoes",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\shoe icon.png",
-                            Name = "Shoes"
-                        },
-                        new
-                        {
-                            Id = 2,
                             Description = "Shirts",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\shirt icon.png",
+                            Icon = "/Category Images/shirt icon.png",
                             Name = "Shirts"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 2,
                             Description = "Pants",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\pants icon.png",
+                            Icon = "/Category Images/pants icon.png",
                             Name = "Pants"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             Description = "dresses",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\dress icon.png",
+                            Icon = "/Category Images/dress icon.png",
                             Name = "Dress"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Shoes",
+                            Icon = "/Category Images/shoe icon.png",
+                            Name = "Shoes"
                         });
                 });
 
@@ -168,42 +168,74 @@ namespace E_commerce_1.Migrations
                         new
                         {
                             Id = 1,
-                            CategoryId = 1,
-                            Description = "sport shoes",
-                            Name = "Nike",
-                            Price = "100"
+                            CategoryId = 3,
+                            Description = "Balenciaga v-neck green dress",
+                            Icon = "/Product Images/Balenciaga dress.jpg",
+                            Name = "Balenciaga Dress",
+                            Price = "2000"
                         },
                         new
                         {
                             Id = 2,
-                            CategoryId = 1,
-                            Description = "sport shoes",
-                            Name = "Adidas",
-                            Price = "150"
+                            CategoryId = 4,
+                            Description = "Elegant brown business dress shoe",
+                            Icon = "/Product Images/elegant business dress shoe.jpg",
+                            Name = "Dress Shoes",
+                            Price = "200"
                         },
                         new
                         {
                             Id = 3,
-                            CategoryId = 2,
-                            Description = "zara shirt",
-                            Name = "zara",
-                            Price = "250"
+                            CategoryId = 4,
+                            Description = "Hermes black noir heel sandal",
+                            Icon = "/Product Images/hermes black noir oasis heel sandal.jpg",
+                            Name = "Hermes Noir Sandal",
+                            Price = "500"
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 2,
-                            Description = "shirt",
-                            Name = "H&M",
+                            Description = "Louis Vuitton Destroyed Carpenter Denim Pants",
+                            Icon = "/Product Images/Louis vuitton Destroyed Carpenter denim pants.jpg",
+                            Name = "Louis Vuitton Denim Pants",
                             Price = "60"
                         },
                         new
                         {
                             Id = 5,
-                            CategoryId = 3,
-                            Description = "pants",
-                            Name = "H&M",
-                            Price = "100"
+                            CategoryId = 1,
+                            Description = "Blue Gucci Shirt",
+                            Icon = "/Product Images/men gucci shirt.jpg",
+                            Name = "Gucci Shirt",
+                            Price = "800"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 4,
+                            Description = "Nike Winflo 8 Road Running shoes",
+                            Icon = "/Product Images/nike winflo 8 mens road running shoes.jpg",
+                            Name = "Nike Road Running shoes",
+                            Price = "300"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 1,
+                            Description = "Gucci Brown Long Sleeve Shirt",
+                            Icon = "/Product Images/women gucci shirt.jpg",
+                            Name = "Gucci Long Sleeve Shirt",
+                            Price = "300"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 1,
+                            Description = "Zara Greeb Long Sleeve Shirt",
+                            Icon = "/Product Images/zara shirt.jpg",
+                            Name = "Zara Long Sleeve Shirt",
+                            Price = "150"
                         });
                 });
 

@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_commerce_1
 {
@@ -17,6 +15,5 @@ namespace E_commerce_1
         public Category Category { get; set; }
         public ICollection<Order> Order { get; set; }
         public IList<Product_Order> Product_Orders { get; set; }//many to many
-
     }
 }

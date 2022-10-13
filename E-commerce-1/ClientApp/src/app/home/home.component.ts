@@ -7,7 +7,6 @@ import { Product } from '../models/product';
 import { ProductService } from '../Product/service/product.service';
 import { ShoppingCartService } from '../shopping-cart/service/shopping-cart.service';
 
-
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -27,7 +26,6 @@ export class HomeComponent implements OnInit {
     constructor(public http: HttpClient,
         public productService: ProductService, public categoryService: CategoryService, public shoopingCartService: ShoppingCartService,
         private loginService: LoginService, private authenticationService: AuthenticationService) {
-
     }
 
     ngOnInit() {

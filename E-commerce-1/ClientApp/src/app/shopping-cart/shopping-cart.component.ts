@@ -15,7 +15,6 @@ export class ShoppingCartComponent implements OnInit {
     items: any;
     displayList: any = false;
     displayEmptyList: any = false;
-
     orders: Order[] = [];;
     totalPriceOfAllProducts: number;
     productCount: number;
@@ -81,7 +80,6 @@ export class ShoppingCartComponent implements OnInit {
         this.shoopingCartService.clearCart();
         this.getAllItems();
         this.displayEmptyList = true;
-
     }
 
     checkout() {

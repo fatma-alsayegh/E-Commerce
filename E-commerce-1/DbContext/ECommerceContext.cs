@@ -10,12 +10,9 @@ namespace E_commerce_1.Context
         public DbSet<Role> Roles { get; set; }
         public DbSet<User_Role> User_Roles { get; set; }
         public DbSet<Product_Order> Product_Orders { get; set; }
-
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //role
@@ -117,6 +114,7 @@ namespace E_commerce_1.Context
                 UserId = 3,
                 RoleId = 2
             });
+
             //category
             modelBuilder.Entity<Category>().HasData(
               new Category()
@@ -124,7 +122,7 @@ namespace E_commerce_1.Context
                   Id = 1,
                   Name = "Shirts",
                   Description = "Shirts",
-                  Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\shirt icon.png"
+                  Icon = "/Category Images/shirt icon.png"
 
               },
               new Category()
@@ -132,24 +130,24 @@ namespace E_commerce_1.Context
                   Id = 2,
                   Name = "Pants",
                   Description = "Pants",
-                  Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\pants icon.png",
+                  Icon = "/Category Images/pants icon.png",
 
               }, new Category()
               {
                   Id = 3,
                   Name = "Dress",
                   Description = "dresses",
-                  Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\dress icon.png"
+                  Icon = "/Category Images/dress icon.png"
 
               }, new Category()
               {
-                Id = 4,
+                  Id = 4,
                   Name = "Shoes",
                   Description = "Shoes",
-                  Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\shoe icon.png"
+                  Icon = "/Category Images/shoe icon.png"
               });
-            //product
 
+            //product
             modelBuilder.Entity<Product>().HasData(
                new Product()
                {
@@ -158,7 +156,7 @@ namespace E_commerce_1.Context
                    Description = "Balenciaga v-neck green dress",
                    Price = "2000",
                    CategoryId = 3,
-                   Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\Balenciaga dress.jpg"
+                   Icon = "/Product Images/Balenciaga dress.jpg"
                },
                new Product()
                {
@@ -167,8 +165,7 @@ namespace E_commerce_1.Context
                    Description = "Elegant brown business dress shoe",
                    Price = "200",
                    CategoryId = 4,
-                   Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\elegant business dress shoe.jpg"
-
+                   Icon = "/Product Images/elegant business dress shoe.jpg"
                },
                new Product()
                {
@@ -177,8 +174,7 @@ namespace E_commerce_1.Context
                    Description = "Hermes black noir heel sandal",
                    Price = "500",
                    CategoryId = 4,
-                   Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\hermes black noir oasis heel sandal.jpg"
-
+                   Icon = "/Product Images/hermes black noir oasis heel sandal.jpg"
                },
                new Product()
                {
@@ -187,8 +183,7 @@ namespace E_commerce_1.Context
                    Description = "Louis Vuitton Destroyed Carpenter Denim Pants",
                    Price = "60",
                    CategoryId = 2,
-                   Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\Louis vuitton Destroyed Carpenter denim pants.jpg"
-
+                   Icon = "/Product Images/Louis vuitton Destroyed Carpenter denim pants.jpg"
                },
                new Product()
                {
@@ -197,8 +192,7 @@ namespace E_commerce_1.Context
                    Description = "Blue Gucci Shirt",
                    Price = "800",
                    CategoryId = 1,
-                   Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\men gucci shirt.jpg"
-
+                   Icon = "/Product Images/men gucci shirt.jpg"
                },
                new Product()
                {
@@ -207,8 +201,7 @@ namespace E_commerce_1.Context
                    Description = "Nike Winflo 8 Road Running shoes",
                    Price = "300",
                    CategoryId = 4,
-                   Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\nike winflo 8 mens road running shoes.jpg"
-
+                   Icon = "/Product Images/nike winflo 8 mens road running shoes.jpg"
                },
                new Product()
                {
@@ -217,8 +210,7 @@ namespace E_commerce_1.Context
                    Description = "Gucci Brown Long Sleeve Shirt",
                    Price = "300",
                    CategoryId = 1,
-                   Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\women gucci shirt.jpg"
-
+                   Icon = "/Product Images/women gucci shirt.jpg"
                },
                new Product()
                {
@@ -227,9 +219,10 @@ namespace E_commerce_1.Context
                    Description = "Zara Greeb Long Sleeve Shirt",
                    Price = "150",
                    CategoryId = 1,
-                   Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\zara shirt.jpg"
+                   Icon = "/Product Images/zara shirt.jpg"
 
                });
+
             //order
             modelBuilder.Entity<Order>()
             .HasOne<User>(s => s.Users)
@@ -248,8 +241,6 @@ namespace E_commerce_1.Context
                .HasOne<Order>(sc => sc.Order)
                .WithMany(s => s.Product_Orders)
                .HasForeignKey(sc => sc.OrderId);
-
-
         }
     }
 }

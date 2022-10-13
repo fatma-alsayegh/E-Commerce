@@ -72,7 +72,7 @@ body {
 
 @media (max-width: 767px) {
     .el-wrapper {
-        width: 150px;/*//290px*/
+        width: 150px; /*//290px*/
         margin: 15px auto; /*30px auto*/
     }
 }

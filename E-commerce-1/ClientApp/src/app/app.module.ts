@@ -15,8 +15,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -50,20 +48,19 @@ import { AuthenticationService } from './authentication/authentication.service';
         MatDialogModule,
         MatCardModule,
         MatInputModule,
-        MatTabsModule, 
+        MatTabsModule,
         MatMenuModule, MatFormFieldModule, MatButtonModule, MatToolbarModule,
         BrowserAnimationsModule,
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
-            { path: '', component: HomeComponent},
-            { path: 'authentication/profile', component: ProfileComponent ,canActivate: [AuthGuard]},
+            { path: '', component: HomeComponent },
+            { path: 'authentication/profile', component: ProfileComponent, canActivate: [AuthGuard] },
             { path: 'category', component: CategoryComponent, canActivate: [AuthGuard, RoleAdminGuard] },
             { path: 'product', component: ProductComponent, canActivate: [AuthGuard, RoleAdminGuard] },
             { path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthGuard, RoleCustomerGuard] },
-
         ]),
     ],
-    providers: [ CategoryService, AuthenticationService],
+    providers: [CategoryService, AuthenticationService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

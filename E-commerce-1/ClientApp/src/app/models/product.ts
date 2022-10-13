@@ -1,5 +1,4 @@
 export class Product {
-
     constructor() {
         this.quantity = 1;
     }

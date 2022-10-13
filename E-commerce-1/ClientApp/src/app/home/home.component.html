@@ -3,6 +3,9 @@
         <div class="container">
             <br>
             <div class="row align-right">
+                <div class="col-12" *ngIf="!loginService.loggedIn" style="text-align: center;font-size: 120%; ">
+                    <p>Please login to add items to cart</p>
+                </div>
                 <div class="col-12">
                     <mat-tab-group mat-align-tabs="start" (selectedTabChange)="filterCategory($event)">
                         <mat-tab label="All Categories">
@@ -12,23 +15,18 @@
                     </mat-tab-group>
                 </div>
             </div>
-
             <div class="row">
-
                 <div class="col-md-4" *ngFor="let product of tempFilteredData">
                     <div class="container page-wrapper">
                         <div class="page-inner">
                             <div class="row">
                                 <div class="el-wrapper">
                                     <div class="box-up">
-                                        <!--https://www.supah.it/dribbble/012/1.jpg-->
-                                        <img class="img" src="https://www.supah.it/dribbble/012/1.jpg" alt="">
+                                        <img class="img" src="{{ product.icon }}" alt="" style="width: 300px; height: 300px;">
                                         <div class="img-info">
                                             <div class="info-inner">
                                                 <span class="p-name">{{product.name}}</span>
                                                 <span class="p-company">{{product.description}}</span>
-                                                <!--<span class="p-price">--><!--{{product.price}} AED--><!--</span>-->
-
                                             </div>
                                         </div>
                                     </div>
@@ -41,7 +39,6 @@
                                             <div class="quantity" *ngIf="!dontShowComponent">
                                                 <div class="counter">
                                                     <div class="btn" (click)="minus(product)">-</div>
-
                                                     <div class="count"> {{product.quantity}} </div>
                                                     <div class="btn" (click)="plus(product)">+</div>
                                                 </div>
@@ -49,10 +46,8 @@
                                             <div class="add-to-cart" *ngIf="!dontShowComponent">
                                                 <button mat-button (click)="addToCart(product)">
                                                     <mat-icon aria-label="Example home icon">add_shopping_cart</mat-icon>
-
                                                 </button>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>

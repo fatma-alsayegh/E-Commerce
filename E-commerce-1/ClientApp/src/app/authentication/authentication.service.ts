@@ -3,7 +3,6 @@ import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '../models/location';
 import { User } from '../models/user';
-import { LoginService } from './login/service/login.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +14,7 @@ export class AuthenticationService {
     location: Location;
     locationId;
 
-    constructor(private router: Router, @Inject('BASE_URL') baseUrl: string, private http: HttpClient, private loginService: LoginService,
+    constructor(private router: Router, @Inject('BASE_URL') baseUrl: string, private http: HttpClient
     ) {
         this._baseUrl = baseUrl;
     }

@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
     productCount: number;
     role: Role;
     displayCustomerComponents = false;
+    i: any;
 
     constructor(private authService: AuthenticationService,
         @Inject('BASE_URL') baseUrl: string, public productService: ProductService, private profileService: ProfileService, public shoopingCartService: ShoppingCartService,
@@ -40,10 +41,8 @@ export class ProfileComponent implements OnInit {
 
     async ngOnInit(): Promise<void> {
         await this.fetchDetails();
-
         await this.fetchAllOrders();
         await this.fetchRole();
-
     }
 
     async fetchDetails() {
@@ -57,7 +56,7 @@ export class ProfileComponent implements OnInit {
             this.displayCustomerComponents = true;
         }
     }
-    i: any;
+
     async fetchAllOrders() {
         await this.profileService.getAllOrders();
         this.orders = this.profileService.orders;

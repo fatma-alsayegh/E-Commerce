@@ -44,28 +44,28 @@ namespace E_commerce_1.Migrations
                         {
                             Id = 1,
                             Description = "Shirts",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\shirt icon.png",
+                            Icon = "/Category Images/shirt icon.png",
                             Name = "Shirts"
                         },
                         new
                         {
                             Id = 2,
                             Description = "Pants",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\pants icon.png",
+                            Icon = "/Category Images/pants icon.png",
                             Name = "Pants"
                         },
                         new
                         {
                             Id = 3,
                             Description = "dresses",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\dress icon.png",
+                            Icon = "/Category Images/dress icon.png",
                             Name = "Dress"
                         },
                         new
                         {
                             Id = 4,
                             Description = "Shoes",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\shoe icon.png",
+                            Icon = "/Category Images/shoe icon.png",
                             Name = "Shoes"
                         });
                 });
@@ -168,7 +168,7 @@ namespace E_commerce_1.Migrations
                             Id = 1,
                             CategoryId = 3,
                             Description = "Balenciaga v-neck green dress",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\Balenciaga dress.jpg",
+                            Icon = "/Product Images/Balenciaga dress.jpg",
                             Name = "Balenciaga Dress",
                             Price = "2000"
                         },
@@ -177,7 +177,7 @@ namespace E_commerce_1.Migrations
                             Id = 2,
                             CategoryId = 4,
                             Description = "Elegant brown business dress shoe",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\elegant business dress shoe.jpg",
+                            Icon = "/Product Images/elegant business dress shoe.jpg",
                             Name = "Dress Shoes",
                             Price = "200"
                         },
@@ -186,7 +186,7 @@ namespace E_commerce_1.Migrations
                             Id = 3,
                             CategoryId = 4,
                             Description = "Hermes black noir heel sandal",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\hermes black noir oasis heel sandal.jpg",
+                            Icon = "/Product Images/hermes black noir oasis heel sandal.jpg",
                             Name = "Hermes Noir Sandal",
                             Price = "500"
                         },
@@ -195,7 +195,7 @@ namespace E_commerce_1.Migrations
                             Id = 4,
                             CategoryId = 2,
                             Description = "Louis Vuitton Destroyed Carpenter Denim Pants",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\Louis vuitton Destroyed Carpenter denim pants.jpg",
+                            Icon = "/Product Images/Louis vuitton Destroyed Carpenter denim pants.jpg",
                             Name = "Louis Vuitton Denim Pants",
                             Price = "60"
                         },
@@ -204,7 +204,7 @@ namespace E_commerce_1.Migrations
                             Id = 5,
                             CategoryId = 1,
                             Description = "Blue Gucci Shirt",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\men gucci shirt.jpg",
+                            Icon = "/Product Images/men gucci shirt.jpg",
                             Name = "Gucci Shirt",
                             Price = "800"
                         },
@@ -213,7 +213,7 @@ namespace E_commerce_1.Migrations
                             Id = 6,
                             CategoryId = 4,
                             Description = "Nike Winflo 8 Road Running shoes",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\nike winflo 8 mens road running shoes.jpg",
+                            Icon = "/Product Images/nike winflo 8 mens road running shoes.jpg",
                             Name = "Nike Road Running shoes",
                             Price = "300"
                         },
@@ -222,7 +222,7 @@ namespace E_commerce_1.Migrations
                             Id = 7,
                             CategoryId = 1,
                             Description = "Gucci Brown Long Sleeve Shirt",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\women gucci shirt.jpg",
+                            Icon = "/Product Images/women gucci shirt.jpg",
                             Name = "Gucci Long Sleeve Shirt",
                             Price = "300"
                         },
@@ -231,7 +231,7 @@ namespace E_commerce_1.Migrations
                             Id = 8,
                             CategoryId = 1,
                             Description = "Zara Greeb Long Sleeve Shirt",
-                            Icon = "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Product Images\\zara shirt.jpg",
+                            Icon = "/Product Images/zara shirt.jpg",
                             Name = "Zara Long Sleeve Shirt",
                             Price = "150"
                         });

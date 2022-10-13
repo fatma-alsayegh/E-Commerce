@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -6,14 +5,12 @@ import { CategoryService } from '../Category/service/category.service';
 import { Product } from '../models/product';
 import { ProductService } from './service/product.service';
 
-
-
-
 @Component({
     selector: 'app-product',
     templateUrl: './product.component.html',
     styleUrls: ['./product.component.css']
 })
+
 export class ProductComponent implements OnInit {
     formData = new FormData();
     categoryList: any = [];
@@ -34,9 +31,11 @@ export class ProductComponent implements OnInit {
         quantity: 0
     }
     productsEmpty = false;
+    @ViewChild('CloseButtonEdit') CloseButtonEdit;
+    @ViewChild('CloseButtonAdd') CloseButtonAdd;
+    @ViewChild('productForm') productForm;
 
-    constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string,
-        public productService: ProductService, public categoryService: CategoryService, private domSanitizer: DomSanitizer
+    constructor(@Inject('BASE_URL') baseUrl: string, public productService: ProductService, public categoryService: CategoryService, private domSanitizer: DomSanitizer
     ) {
         this._baseUrl = baseUrl;
     }
@@ -51,10 +50,8 @@ export class ProductComponent implements OnInit {
             result => {
                 this.products = result;
                 this.tempFilteredData = this.products;
-
             }
         )
-
     }
 
     edit(product: any) {
@@ -64,10 +61,12 @@ export class ProductComponent implements OnInit {
         this._product.description = product.description;
         this._product.price = product.price;
         this._product.categoryId = product.categoryId;
+        this._product.icon = product.icon;
+        this.url = product.icon;
     }
-    @ViewChild('CloseButtonEdit') CloseButtonEdit;
 
     updateProduct(ngForm: NgForm) {
+        this.isFormValid = false;
         this._product.name = ngForm.value.name;
         this._product.description = ngForm.value.description;
         this._product.price = ngForm.value.price;
@@ -75,10 +74,16 @@ export class ProductComponent implements OnInit {
 
         if (this._product.name == "" || this._product.description == "" || this._product.price == "") {
             this.isFormValid = true;
-            //this.areCredentialsInvalid = false;
             return;
         }
-        this.productService.editProduct(this._product).subscribe(
+        this.formData.set('id', this._product.id.toString());
+        this.formData.set('name', this._product.name);
+        this.formData.set('description', this._product.description);
+        this.formData.set('price', this._product.price);
+        this.formData.set('categoryId', this._product.categoryId.toString());
+        this.formData.set('icon', this.url);
+
+        this.productService.editProduct(this.formData).subscribe(
             result => {
                 this.CloseButtonEdit.nativeElement.click();
                 this.fetchData();
@@ -87,7 +92,6 @@ export class ProductComponent implements OnInit {
             },
             (err) => {
                 this.isFormValid = false;
-
                 console.log(err);
             }
         );
@@ -99,7 +103,6 @@ export class ProductComponent implements OnInit {
                 (u: Product) => u.id !== product.id
             );
             this.fetchData();
-
         });
         if (this.products.length < 0) {
             this.productsEmpty = true;
@@ -110,7 +113,6 @@ export class ProductComponent implements OnInit {
         this.categoryService.getAllCategories().subscribe(
             result => {
                 this.categoryList = result;
-
                 for (let i = 0; i < result.length; i++) {
                     this.categoryMap.set(this.categoryList[i].id, this.categoryList[i].name)
                 }
@@ -136,9 +138,6 @@ export class ProductComponent implements OnInit {
         }
         this.tempFilteredData = this.filteredCategoryData;
     }
-    @ViewChild('CloseButtonAdd') CloseButtonAdd;
-    @ViewChild('my_form') my_form;
-
 
     addProduct(ngForm: NgForm) {
         this._product.name = ngForm.value.name;
@@ -148,29 +147,24 @@ export class ProductComponent implements OnInit {
 
         if (!ngForm.valid) {
             this.isFormValid = true;
-            //this.areCredentialsInvalid = false;
             return;
         }
+
         this.formData.set('name', this._product.name);
         this.formData.set('description', this._product.description);
         this.formData.set('price', this._product.price);
         this.formData.set('categoryId', this._product.categoryId.toString());
-        //this.formData.set('icon', this.url);
+        this.formData.set('icon', this.url);
 
         this.productService.addProduct(this.formData).subscribe(
             result => {
-                if (result == null) {
-                    console.log('duplicate product');
-                } else {
-                    this.CloseButtonAdd.nativeElement.click();
-                    this.fetchData();
-                    this.my_form.reset();
-                }
-                //this.closebutton.nativeElement.click();
-                //this.fetchData();
+                this.CloseButtonAdd.nativeElement.click();
+                this.fetchData();
+                this.url = "";
+                this.isFormValid = false;
+                this.productForm.reset();
             }, error => {
                 this.isFormValid = false;
-                //this.areCredentialsInvalid = true;
                 console.log(error);
             }
         );
@@ -182,7 +176,7 @@ export class ProductComponent implements OnInit {
     fileToUpload: File = null;
 
     selectFile(event: any) {
-        
+
         if (!event.target.files[0] || event.target.files[0].length == 0) {
             this.msg = 'You must select an image';
             return;

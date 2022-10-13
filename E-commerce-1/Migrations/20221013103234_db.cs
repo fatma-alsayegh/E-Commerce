@@ -2,7 +2,7 @@
 
 namespace E_commerce_1.Migrations
 {
-    public partial class d : Migration
+    public partial class db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -181,10 +181,10 @@ namespace E_commerce_1.Migrations
                 columns: new[] { "Id", "Description", "Icon", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Shoes", "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\shoe icon.png", "Shoes" },
-                    { 2, "Shirts", "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\shirt icon.png", "Shirts" },
-                    { 3, "Pants", "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\pants icon.png", "Pants" },
-                    { 4, "dresses", "C:\\Users\\fatma.alsayegh\\source\\repos\\E-commerce-1\\E-commerce-1\\wwwroot\\Category Images\\dress icon.png", "Dress" }
+                    { 1, "Shirts", "/Category Images/shirt icon.png", "Shirts" },
+                    { 2, "Pants", "/Category Images/pants icon.png", "Pants" },
+                    { 3, "dresses", "/Category Images/dress icon.png", "Dress" },
+                    { 4, "Shoes", "/Category Images/shoe icon.png", "Shoes" }
                 });
 
             migrationBuilder.InsertData(
@@ -210,11 +210,14 @@ namespace E_commerce_1.Migrations
                 columns: new[] { "Id", "CategoryId", "Description", "Icon", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, 1, "sport shoes", null, "Nike", "100" },
-                    { 2, 1, "sport shoes", null, "Adidas", "150" },
-                    { 3, 2, "zara shirt", null, "zara", "250" },
-                    { 4, 2, "shirt", null, "H&M", "60" },
-                    { 5, 3, "pants", null, "H&M", "100" }
+                    { 5, 1, "Blue Gucci Shirt", "/Product Images/men gucci shirt.jpg", "Gucci Shirt", "800" },
+                    { 7, 1, "Gucci Brown Long Sleeve Shirt", "/Product Images/women gucci shirt.jpg", "Gucci Long Sleeve Shirt", "300" },
+                    { 8, 1, "Zara Greeb Long Sleeve Shirt", "/Product Images/zara shirt.jpg", "Zara Long Sleeve Shirt", "150" },
+                    { 4, 2, "Louis Vuitton Destroyed Carpenter Denim Pants", "/Product Images/Louis vuitton Destroyed Carpenter denim pants.jpg", "Louis Vuitton Denim Pants", "60" },
+                    { 1, 3, "Balenciaga v-neck green dress", "/Product Images/Balenciaga dress.jpg", "Balenciaga Dress", "2000" },
+                    { 2, 4, "Elegant brown business dress shoe", "/Product Images/elegant business dress shoe.jpg", "Dress Shoes", "200" },
+                    { 3, 4, "Hermes black noir heel sandal", "/Product Images/hermes black noir oasis heel sandal.jpg", "Hermes Noir Sandal", "500" },
+                    { 6, 4, "Nike Winflo 8 Road Running shoes", "/Product Images/nike winflo 8 mens road running shoes.jpg", "Nike Road Running shoes", "300" }
                 });
 
             migrationBuilder.InsertData(

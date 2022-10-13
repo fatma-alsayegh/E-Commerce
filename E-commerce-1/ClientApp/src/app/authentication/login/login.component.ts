@@ -59,5 +59,3 @@ export class LoginComponent implements OnInit {
         this.authenticationService.routeToHome();
     }
 }
-
-

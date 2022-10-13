@@ -1,7 +1,9 @@
 <header>
     <nav class="fixed-top navbar navbar-expand-sm navbar-toggleable-sm bg-white navbar-light  border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="navbar-brand" [routerLink]="['/']">E-commerce</a>
+            <a class="navbar-brand" [routerLink]="['/']">
+                Luxary Items <img src="/shopping-cart.png" style="width: 70px; height: 60px;" />
+            </a>
             <button class="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
@@ -29,7 +31,6 @@
                         <button mat-button class=" pointer" (click)="login()" *ngIf="!authenticationService.isAuthenticated">
                             <mat-icon aria-label="Example home icon">login</mat-icon>login
                         </button>
-
                     </li>
                 </ul>
             </div>
