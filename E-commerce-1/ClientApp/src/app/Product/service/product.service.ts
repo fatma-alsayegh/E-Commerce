@@ -12,7 +12,7 @@ export class ProductService {
         this._baseUrl = baseUrl;
     }
     getAllProducts() {
-        return this.http.get<Product[]>(this._baseUrl + 'product');
+        return this.http.get<Product[]>(this._baseUrl + 'product?id=' +0);
     }
 
     addProduct(formData: FormData) {

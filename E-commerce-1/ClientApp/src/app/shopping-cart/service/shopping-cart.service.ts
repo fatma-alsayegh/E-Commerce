@@ -26,6 +26,7 @@ export class ShoppingCartService {
         quantity: 0
     };
 
+    tempProducts: any;
     constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this._baseUrl = baseUrl;
     }
@@ -42,6 +43,7 @@ export class ShoppingCartService {
 
         if (this.products.findIndex(x => p.id == x.id) == -1) {
             this.products.push(p);
+            this.tempProducts = this.products;
         }
         else {
             var existingItem = this.products.filter(x => x.id == p.id)[0];
@@ -83,13 +85,14 @@ export class ShoppingCartService {
         return this.http.post<Order>(this._baseUrl + 'order', order);
     }
 
-    addProductsToOrder(order: Order) {
+
+    async addProductsToOrder(order: Order) {
         for (this.i = 0; this.i < order.productCount; this.i++) {
-            this.productsComplete += this.products[this.i].quantity;
+            this.productsComplete += this.tempProducts[this.i].quantity;
             this.currentProductOrder.orderId = order.id;
-            this.currentProductOrder.productId = this.products[this.i].id;
-            this.currentProductOrder.quantity = this.products[this.i].quantity;
-            this.http.post<Product_Order>(this._baseUrl + 'productorder', this.currentProductOrder).subscribe(
+            this.currentProductOrder.productId = this.tempProducts[this.i].id;
+            this.currentProductOrder.quantity = this.tempProducts[this.i].quantity;
+            await this.http.post<Product_Order>(this._baseUrl + 'productorder', this.currentProductOrder).subscribe(
                 result => {
                 }, error => {
                     console.log(error);

@@ -30,6 +30,8 @@ export class ProfileComponent implements OnInit {
     role: Role;
     displayCustomerComponents = false;
     i: any;
+    tempOrders: Order[] = [];
+
 
     constructor(private authService: AuthenticationService,
         @Inject('BASE_URL') baseUrl: string, public productService: ProductService, private profileService: ProfileService, public shoopingCartService: ShoppingCartService,
@@ -60,16 +62,47 @@ export class ProfileComponent implements OnInit {
     async fetchAllOrders() {
         await this.profileService.getAllOrders();
         this.orders = this.profileService.orders;
-
         for (this.i = 0; this.i < this.orders.length; this.i++) {
-            if (this.orders[this.i].userId != this.profile.id) {
-                this.orders.splice(this.orders.indexOf(this.i), 1);
+            if (this.orders[this.i].userId == this.profile.id) {
+                this.tempOrders.push(this.orders[this.i]);
             }
         }
-
         this.product_orders = this.profileService.product_orders;
-        if (this.orders.length > 0) {
+
+        if (this.tempOrders.length > 0) {
             this.displayList = true;
+        }
+    }
+
+    tempOrderId:number;
+    productsComplete = 0;
+    tempProductOrders: Product_Order[] = [];
+    tempProducts = {
+        id: 0,
+        name: '',
+        description: '',
+        icon: '',
+        price: '',
+        categoryId: 0,
+        quantity: 1
+    };
+    tempProductArray: Product[] = [];
+
+    async productsInOrder(order: any) {
+        this.tempProductArray.length = 0;
+        this.product_orders = this.profileService.product_orders;
+        for (this.i = 0; this.i < this.product_orders.length; this.i++) {
+            this.tempOrderId=0
+            if (order.id == this.product_orders[this.i].orderId) {
+                this.productsComplete += this.product_orders[this.i].quantity;
+                await this.profileService.getProduct(this.product_orders[this.i].productId)
+                this.tempProducts = this.profileService.products;
+                this.tempProducts.quantity = this.product_orders[this.i].quantity;
+                this.tempProductArray.push(this.tempProducts);
+            }
+            if (this.productsComplete == order.productCount) {
+                break;
+            }
         }
     }
 }

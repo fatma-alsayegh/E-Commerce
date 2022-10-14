@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -49,7 +50,7 @@ import { AuthenticationService } from './authentication/authentication.service';
         MatCardModule,
         MatInputModule,
         MatTabsModule,
-        MatMenuModule, MatFormFieldModule, MatButtonModule, MatToolbarModule,
+        MatMenuModule, MatFormFieldModule, MatButtonModule, MatToolbarModule, MatTableModule,
         BrowserAnimationsModule,
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },

@@ -16,19 +16,49 @@ namespace E_commerce_1.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts(int id)
         {
-            var product = await _eCommerceContext.Products.ToListAsync();
-            if (product != null)
+            // var product = await _eCommerceContext.Products.ToListAsync();
+            if (id == 0)
             {
-                return Ok(product);
+                var product = await _eCommerceContext.Products.ToListAsync();
+                if (product != null)
+                {
+                    return Ok(product);
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return null;
+            else {
+                var product = await _eCommerceContext.Products.FindAsync(id);
+                if (product != null)
+                {
+                    return Ok(product);
+                }
+                else
+                {
+                    return null;
+                }
             }
+            
         }
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetOneProduct([FromBody]int id)
+        //{
+        //    var product = await _eCommerceContext.Products.FindAsync(id);
 
+        //    //var product = await _eCommerceContext.Products.ToListAsync();
+        //    if (product != null)
+        //    {
+        //        return Ok(product);
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
         [HttpPost]
         public async Task<IActionResult> AddProduct([FromForm] Product product)
         {

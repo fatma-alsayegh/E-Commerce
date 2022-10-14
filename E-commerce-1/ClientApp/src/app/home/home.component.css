@@ -343,6 +343,10 @@ body {
 .box-up:hover .info-inner {
     display: block;
 }
+.box:hover .info-inner {
+    display: block;
+}
+
 
 .mat-tab-group {
     margin-bottom: 48px;
